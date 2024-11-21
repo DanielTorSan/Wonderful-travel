@@ -4,16 +4,13 @@
     <title>Wonderful Travel</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <style>
-        body { font-family: Arial, Helvetica, sans-serif; }
-        .datahora { font-size: 1.2em; font-weight: bold; color: white; text-align: center; border-radius: 0.9em; background-image: linear-gradient(#04376a, #4578ab); width: 9em; padding: 0.4em 0; }
-        .img-ampliada { position: absolute; z-index: 10; }
-    </style>
-    <script defer src="../model/inici.js"></script>
+    <link rel="stylesheet" href="Estils/vista_rellotje_analogic.css">
+    <script defer src="../model/rellotge.js"></script>
 </head>
 <body onload="init()">
     <div id="data" class="datahora"></div><br><br>
     <div class="container">
+        <canvas id="canvas" width="200" height="200"></canvas>
         <form id="viatgeForm">
             <div class="form-group">
                 <label for="continent">Continent:</label>
