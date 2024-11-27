@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-09-2024 a las 19:19:07
+-- Tiempo de generación: 27-11-2024 a las 15:14:25
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.1.25
 
@@ -18,8 +18,9 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `wonderful_travel`
+-- Base de datos: `wonderful_travel2`
 --
+DROP DATABASE `wonderful_travel`;
 CREATE DATABASE IF NOT EXISTS `wonderful_travel` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `wonderful_travel`;
 
@@ -29,19 +30,26 @@ USE `wonderful_travel`;
 -- Estructura de tabla para la tabla `destins`
 --
 
+DROP TABLE IF EXISTS `destins`;
 CREATE TABLE `destins` (
   `id` int(10) UNSIGNED NOT NULL,
   `continent` varchar(20) NOT NULL,
   `pais` varchar(40) NOT NULL,
-  `preu` float NOT NULL
+  `preu` float NOT NULL,
+  `foto` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `destins`
 --
 
-INSERT INTO `destins` (`id`, `continent`, `pais`, `preu`) VALUES
-(1, 'Àsia', 'India', 1950);
+INSERT INTO `destins` (`id`, `continent`, `pais`, `preu`, `foto`) VALUES
+(1, 'Àsia', 'India', 1950, NULL),
+(2, 'Europa', 'França', 2300.5, NULL),
+(3, 'Amèrica', 'Brasil', 1800, 'brazil.jpg'),
+(4, 'Àfrica', 'Sud-àfrica', 2500, NULL),
+(5, 'Oceania', 'Austràlia', 3200.75, 'australia.jpg'),
+(6, 'Europa', 'Espanya', 2000, NULL);
 
 -- --------------------------------------------------------
 
@@ -49,16 +57,24 @@ INSERT INTO `destins` (`id`, `continent`, `pais`, `preu`) VALUES
 -- Estructura de tabla para la tabla `reserva`
 --
 
+DROP TABLE IF EXISTS `reserva`;
 CREATE TABLE `reserva` (
   `id` int(10) UNSIGNED NOT NULL,
-  `id_desti` int(11) NOT NULL,
-  `nom` varchar(30) NOT NULL,
-  `tlf` int(11) NOT NULL,
-  `data` date NOT NULL,
-  `descompte` tinyint(1) DEFAULT NULL,
-  `preuF` mediumint(9) NOT NULL,
-  `persones` tinyint(3) UNSIGNED NOT NULL
+  `id_desti` int(10) UNSIGNED NOT NULL,
+  `fecha_reserva` date NOT NULL,
+  `nom_titular` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `reserva`
+--
+
+INSERT INTO `reserva` (`id`, `id_desti`, `fecha_reserva`, `nom_titular`) VALUES
+(1, 2, '2024-11-20', 'Carlos Pérez'),
+(2, 3, '2024-11-21', 'Ana García'),
+(3, 4, '2024-11-22', 'Laura Gómez'),
+(4, 5, '2024-11-23', 'Pere Pi'),
+(5, 6, '2024-11-24', 'Pedro Sánchez');
 
 --
 -- Índices para tablas volcadas
@@ -68,13 +84,15 @@ CREATE TABLE `reserva` (
 -- Indices de la tabla `destins`
 --
 ALTER TABLE `destins`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_pais` (`pais`);
 
 --
 -- Indices de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_desti` (`id_desti`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -84,13 +102,23 @@ ALTER TABLE `reserva`
 -- AUTO_INCREMENT de la tabla `destins`
 --
 ALTER TABLE `destins`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `reserva`
 --
 ALTER TABLE `reserva`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `reserva`
+--
+ALTER TABLE `reserva`
+  ADD CONSTRAINT `reserva_ibfk_1` FOREIGN KEY (`id_desti`) REFERENCES `destins` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
