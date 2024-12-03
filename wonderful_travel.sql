@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-11-2024 a las 15:14:25
+-- Tiempo de generación: 03-12-2024 a las 20:20:09
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.1.25
 
@@ -18,9 +18,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `wonderful_travel2`
+-- Base de datos: `wonderful_travel`
 --
-DROP DATABASE `wonderful_travel`;
 CREATE DATABASE IF NOT EXISTS `wonderful_travel` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `wonderful_travel`;
 
@@ -30,7 +29,6 @@ USE `wonderful_travel`;
 -- Estructura de tabla para la tabla `destins`
 --
 
-DROP TABLE IF EXISTS `destins`;
 CREATE TABLE `destins` (
   `id` int(10) UNSIGNED NOT NULL,
   `continent` varchar(20) NOT NULL,
@@ -49,7 +47,12 @@ INSERT INTO `destins` (`id`, `continent`, `pais`, `preu`, `foto`) VALUES
 (3, 'Amèrica', 'Brasil', 1800, 'brazil.jpg'),
 (4, 'Àfrica', 'Sud-àfrica', 2500, NULL),
 (5, 'Oceania', 'Austràlia', 3200.75, 'australia.jpg'),
-(6, 'Europa', 'Espanya', 2000, NULL);
+(6, 'Europa', 'Espanya', 2000, NULL),
+(7, 'Àsia', 'Japó', 2700, 'japon.jpg'),
+(8, 'Europa', 'Itàlia', 2200, NULL),
+(9, 'Amèrica', 'Mèxic', 1500, 'mexic.jpg'),
+(10, 'Àfrica', 'Egipte', 1900, NULL),
+(11, 'Oceania', 'Nova Zelanda', 3400.5, 'nova_zelanda.jpg');
 
 -- --------------------------------------------------------
 
@@ -57,7 +60,6 @@ INSERT INTO `destins` (`id`, `continent`, `pais`, `preu`, `foto`) VALUES
 -- Estructura de tabla para la tabla `reserva`
 --
 
-DROP TABLE IF EXISTS `reserva`;
 CREATE TABLE `reserva` (
   `id` int(10) UNSIGNED NOT NULL,
   `id_desti` int(10) UNSIGNED NOT NULL,
@@ -102,7 +104,7 @@ ALTER TABLE `reserva`
 -- AUTO_INCREMENT de la tabla `destins`
 --
 ALTER TABLE `destins`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `reserva`
